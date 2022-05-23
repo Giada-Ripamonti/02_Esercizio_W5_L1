@@ -1,89 +1,110 @@
-// DATA
-
+// DATA 
 const today = new Date()
 console.log(today);
 document.getElementById('date').innerHTML = today;
 
-let day = today.getDate()
-document.getElementById('day').innerHTML = day;
+document.getElementById('day').innerHTML = today.getDate();
 
 let month = today.getMonth()
 month = ++month
+let printMonth;
 
 switch (month) {
     case 1:
-        document.getElementById('month').innerHTML = 'gennaio';
+        printMonth = 'gennaio';
         break;
     case 2:
-        document.getElementById('month').innerHTML = 'febbraio';
+        printMonth = 'febbraio';
         break;
     case 3:
-        document.getElementById('month').innerHTML = 'marzo';
+        printMonth = 'marzo';
         break;
     case 4:
-        document.getElementById('month').innerHTML = 'aprile';
+        printMonth = 'aprile';
         break;
     case 5:
-        document.getElementById('month').innerHTML = 'maggio';
+        printMonth = 'maggio';
         break;
     case 6:
-        document.getElementById('month').innerHTML = 'giugno';
+        printMonth = 'giugno';
         break;
     case 7:
-        document.getElementById('month').innerHTML = 'luglio';
+        printMonth = 'luglio';
         break;
     case 8:
-        document.getElementById('month').innerHTML = 'agosto';
+        printMonth = 'agosto';
         break;
     case 9:
-        document.getElementById('month').innerHTML = 'settembre';
+        printMonth = 'settembre';
         break;
     case 10:
-        document.getElementById('month').innerHTML = 'ottobre';
+        printMonth = 'ottobre';
         break;
     case 11:
-        document.getElementById('month').innerHTML = 'novembre';
+        printMonth = 'novembre';
         break;
     case 12:
-        document.getElementById('month').innerHTML = 'dicembre';
+        printMonth = 'dicembre';
         break;
 }
 
-let year = today.getFullYear()
-document.getElementById('year').innerHTML = year;
+document.getElementById('month').innerHTML = printMonth;
 
-let euDate = day.toString() + ('/') + month.toString() + ('/') + year.toString();
-document.getElementById('eu_date').innerHTML = euDate;
+document.getElementById('year').innerHTML = today.getFullYear()
 
-// OROLOGIO
+document.getElementById('eu_date').innerHTML = today.getDate() + (' ') + printMonth + (' ') + today.getFullYear();
 
-setInterval(currentTime, 1000);
-
+// OROLOGIO DIGITALE
 function currentTime() {
     const time = new Date();
     let hours = time.getHours();
     let mins = time.getMinutes();
     let secs = time.getSeconds();
-    /* if(secs <= 9){
-         = "0" + secs;
-      } */
-    document.getElementById('time').innerHTML = hours + (':') + mins + (':') + secs; 
+    document.getElementById('time').innerHTML   = (hours > 9 ? hours : '0' + hours) + (':') 
+                                                + (mins > 9 ? mins : '0' + mins) + (':')
+                                                + (secs > 9 ? secs : '0' + secs);
 }
 
-// CRONOMETRO
+setInterval(currentTime, 1000);
+
+// CRONOMETRO DIGITALE
+let stopWatch;
+let minsChrono = 0;
+let secsChrono = 0;
+let msecsChrono = 0;
+printChrono();
+
+function setChrono() {
+    msecsChrono++;
+    if(msecsChrono >= 60) {
+        msecsChrono = 0;
+        secsChrono++;
+        if(secsChrono >= 60) {
+            secsChrono = 0;
+            minsChrono++;
+    }
+    }
+    printChrono();
+}
+
+function printChrono() {
+    document.getElementById('chronometer').innerHTML    = (minsChrono > 9 ? minsChrono : '0' + minsChrono) + (':') 
+                                                        + (secsChrono > 9 ? secsChrono : '0' + secsChrono) + (':') 
+                                                        + (msecsChrono > 9 ? msecsChrono : '0' + msecsChrono);
+}
 
 function startChrono() {
-    let minsChrono = 0;
-    let secsChrono = 0;
-    let msecsChrono = 0;
-    document.getElementById('chronometer').innerHTML = minsChrono + (':') + secsChrono + (':') + msecsChrono;
-    
+stopWatch = setInterval(setChrono, 100);
 }
 
-/* function stopChrono() {
-    document.getElementById('chronometer').innerHTML = 
+function stopChrono(){
+    clearInterval(stopWatch);
 }
- */
-function resetChrono() {
-    document.getElementById('chronometer').innerHTML = ('00:00:00')
+
+function resetChrono(){
+    stopChrono();
+    minsChrono = 0;
+    secsChrono = 0;
+    msecsChrono = 0;
+    printChrono();
 }
