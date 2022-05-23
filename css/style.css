@@ -1,0 +1,65 @@
+body {
+    background-color: rgb(85, 76, 88);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    color: white;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 2rem;
+}
+
+span {
+    font-weight: 700;
+}
+
+.today, .clock, .chrono {
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.today {
+    background-color: rgb(255, 182, 72);
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.today span {
+    color: rgb(202, 121, 0);
+}
+
+.clock, .chrono{
+    background-color: rgb(110, 184, 147);
+    text-align: center;
+    font-size: 4rem;
+}
+
+.chrono p {
+    margin: 0;
+}
+
+.chrono button {
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    background-color: white;
+    color: rgb(43, 126, 85);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 2px rgb(43, 126, 85);
+    padding: 1rem;
+    margin: 0.3rem;
+    text-align: center;
+}
+
+.chrono button:hover {
+    background-color: rgb(182, 248, 215);
+}
+
+.chrono button:active {
+    background-color: rgb(255, 208, 122);
+    color:rgba(255, 153, 0, 0.877);
+}
