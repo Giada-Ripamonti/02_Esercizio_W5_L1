@@ -88,17 +88,20 @@ function setChrono() {
 }
 
 function printChrono() {
-    document.getElementById('chronometer').innerHTML    = (minsChrono > 9 ? minsChrono : '0' + minsChrono) + (':') 
-                                                        + (secsChrono > 9 ? secsChrono : '0' + secsChrono) + (':') 
+    document.getElementById('chronometer').innerHTML    = (minsChrono > 9 ? minsChrono : '0' + minsChrono) + (' : ') 
+                                                        + (secsChrono > 9 ? secsChrono : '0' + secsChrono) + (' : ') 
                                                         + (msecsChrono > 9 ? msecsChrono : '0' + msecsChrono);
 }
 
 function startChrono() {
-stopWatch = setInterval(setChrono, 100);
+    if(stopWatch === undefined) {
+    stopWatch = setInterval(setChrono, 100);
+    }
 }
 
 function stopChrono(){
     clearInterval(stopWatch);
+    stopWatch = undefined;
 }
 
 function resetChrono(){
@@ -107,4 +110,5 @@ function resetChrono(){
     secsChrono = 0;
     msecsChrono = 0;
     printChrono();
+    stopWatch = undefined;
 }
